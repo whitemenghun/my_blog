@@ -1,0 +1,20 @@
+{% for post in posts %}
+
+    <article class="list-article" itemscope itemtype="http://schema.org/Article">
+        <a href="{{ url_for('.post',id=post.id) }}">
+            {% if post.photo %}
+                <div class="article-image" style="background-image:url('{{ post.photo|sub }}')"></div>
+            {% else %}
+                <div class="article-image" style="background-image:url('/images/girl-711087.jpg')"></div>
+            {% endif %}
+        </a>
+        <div class="article-text">
+            <a href="{{ url_for('.post',id=post.id) }}">
+                <h2 itemprop="name">{{ post.tittle }}</h2>
+            </a>
+            <p itemprop="description">{{ post.body | truncate(50,True)| safe }}</p>
+            <a href="{{ url_for('.post',id=post.id) }}" class="read-more-a" itemprop="url"><i
+                    class="fa fa-file-text-o read-more-btn"></i>阅读全文...</a>
+        </div>
+    </article>
+{% endfor %}

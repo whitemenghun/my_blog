@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block page_content %}
+    <div class="col-md-12">
+        <div class="content">
+            <div class="content-box">
+                <div class="content-box-head">
+                    <h3>页面未找到</h3>
+                    <i class="fa fa-info content-box-head-icon yellow-color"></i>
+                </div>
+                <div class="error-page content-box-body">
+                    <h2>404!</h2>
+                    <h3>这个页面不存在.</h3>
+                    <h4>找不到你想要的?尝试一下搜索!</h4>
+                    <div class="error-search">
+                        <input type="text" placeholder="搜索...">
+                        <a href="#">
+                            <div class="error-search-btn Subscribe-btn"><i class="fa fa-paper-plane-o"></i></div>
+                        </a>
+                    </div>
+                    <div class="back-home-section"><i class="fa fa-reply send-comment-btn blue-color"></i><a
+                            href="{{ url_for('main.index') }}" class="back-home-a">回到首页</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,14 @@
+<p>Hi {{ comment.name }},</p>
+<h2>你的评论已经有了回复!</h2>
+<table>
+    <tr>
+        <th>评论原文</th>
+        <th>回复内容</th>
+        <th>查看回复</th>
+    </tr>
+    <tr>
+        <td>{{ comment.body }}</td>
+        <td>{{ message }}</td>
+        <td>{{ url_for('main.post',id=comment.post_id) }}</td>
+    </tr>
+</table>

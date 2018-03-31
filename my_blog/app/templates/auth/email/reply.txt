@@ -1,0 +1,4 @@
+Hi,{{comment.name}}
+你的评论有了回复!
+评论原文:{{comment.body}}
+回复内容:{{message}}

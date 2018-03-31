@@ -1,0 +1,92 @@
+{% macro pagination_widget(pagination, endpoint, fragment='') %}
+    <ul>
+        <li{% if not pagination.has_prev %} class="disabled"{% endif %}>
+            <a href="
+
+
+
+
+
+                    {% if pagination.has_prev %}{{ url_for(endpoint, page=pagination.prev_num, **kwargs) }}{{ fragment }}{% else %}#{% endif %}">
+                <i class="fa fa-chevron-left"></i>
+            </a>
+        </li>
+        {% for p in pagination.iter_pages() %}
+            {% if p %}
+                {% if p == pagination.page %}
+                    <li class="active">
+                        <a href="{{ url_for(endpoint, page = p, **kwargs) }}{{ fragment }}">{{ p }}</a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{{ url_for(endpoint, page = p, **kwargs) }}{{ fragment }}">{{ p }}</a>
+                    </li>
+                {% endif %}
+            {% else %}
+                <li class="disabled"><a href="#">&hellip;</a></li>
+            {% endif %}
+        {% endfor %}
+        <li{% if not pagination.has_next %} class="disabled"{% endif %}>
+            <a href="
+
+
+
+
+
+                    {% if pagination.has_next %}{{ url_for(endpoint, page=pagination.next_num, **kwargs) }}{{ fragment }}{% else %}#{% endif %}">
+                <i class="fa fa-chevron-right"></i>
+            </a>
+        </li>
+    </ul>
+{% endmacro %}
+{% macro sidebar(posts,categories) %}
+    <div class="col-md-4">
+        <aside>
+            <div class="search hidden-xs hidden-sm">
+                <form action="{{ url_for('main.index') }}">
+                    <input type="text" class="search-input" id="keyword" name="keyword" placeholder="搜索">
+                    <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+            <div class="content-box">
+                <div class="content-box-head">
+                    <h3>推荐</h3>
+                    <i class="fa fa-star content-box-head-icon yellow-color"></i>
+                </div>
+                <div class="popular content-box-body">
+                    <ul>
+                        {% for p in posts %}
+                            {% if p.isstar %}
+                                <li>
+                                    <a href="{{ url_for('.post',id=p.id) }}">
+                                        <div class="rectangle-list-style"></div>
+                                        <p>{{ p.tittle }}</p>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="content-box hidden-sm hidden-xs">
+                <div class="content-box-head">
+                    <h3>分类</h3>
+                    <i class="fa fa-bars content-box-head-icon orange-color"></i>
+                </div>
+                <div class="categories content-box-body">
+                    <ul>
+                        {% for category in categories %}
+                            <li>
+                                <a href="{{ url_for('.category',id=category.id) }}">
+                                    <div class="rectangle-list-style"></div>
+                                    {{ category.category_name }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </aside>
+    </div>
+{% endmacro %}
+

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="9140c6ea-cf90-4b53-a9e1-4631cf617b81" name="blog1.0" url="http://123.206.75.101">
+        <fileTransfer host="123.206.75.101" port="22" rootFolder="/var/blog/v-1.0" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="f288e0fe-e415-45a9-a3d4-0e8e6436b06a" name="imhblog" url="http://140.143.67.81">
+        <fileTransfer host="140.143.67.81" port="22" rootFolder="/var/blog/v1.0" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

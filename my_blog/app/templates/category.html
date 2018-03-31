@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% import '_macros.html' as macros %}
+{% block page_content %}
+    <div class="col-md-12">
+        <div class="cat-breadcrumb">
+            <h1>{{ category.category_name }}</h1>
+            <ol class="breadcrumb hidden-sm hidden-xs" itemscope itemtype="http://schema.org/BreadcrumbList">
+                <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <a itemprop="item" href="index-2.html"><span itemprop="name">主页</span></a>
+                    <meta itemprop="position" content="1"/>
+                </li>
+                <li class="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <a itemprop="item" href="category.html"><span itemprop="name">{{ category.category_name }}</span></a>
+                    <meta itemprop="position" content="2"/>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="content">
+            {% include '_post.html' %}
+        </div>
+    </div>
+    {{ macros.sidebar(star_posts,g.categories) }}
+{% endblock %}

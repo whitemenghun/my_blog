@@ -1,0 +1,179 @@
+{% extends 'base.html' %}
+{% import '_macros.html' as macros %}
+{% block page_content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="cat-breadcrumb">
+                    <h2>{{ post.categorys.category_name }}</h2>
+                    <ol class="breadcrumb hidden-sm hidden-xs" itemscope itemtype="http://schema.org/BreadcrumbList">
+                        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                            <a itemprop="item" href="index-2.html"><span itemprop="name">主页</span></a>
+                            <meta itemprop="position" content="1"/>
+                        </li>
+                        <li class="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                            <a itemprop="item" href="category.html"><span
+                                    itemprop="name">{{ post.categorys.category_name }}</span></a>
+                            <meta itemprop="position" content="2"/>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="content">
+                    <div itemscope itemtype="http://schema.org/Article">
+
+                        <article class="post-article">
+                            {% if post.photo %}
+                                <div class="post-main-image" itemprop="image" itemscope
+                                     itemtype="https://schema.org/ImageObject"
+                                     style="background-image:url('{{ post.photo|sub }}')">
+                                    <meta itemprop="image" content="{{ post.photo|sub }}">
+                                </div>
+                            {% else %}
+                                <div class="post-main-image" itemprop="image" itemscope
+                                     itemtype="https://schema.org/ImageObject"
+                                     style="background-image:url('/images/girl-1262801.jpg');">
+                                    <meta itemprop="image" content="/images/girl-1262801.jpg">
+                                </div>
+                            {% endif %}
+                            <div class="col-md-12">
+                                <h1 class="post-title" itemprop="name">{{ post.tittle }}</h1>
+                                <p class="post-text" itemprop="articleBody">{{ post.body|safe }}
+                                </p>
+                                <ul class="share-post">
+
+                                    <li><a href="#"><i class="fa fa-arrow-up"
+                                                       aria-hidden="true"></i><span>回到顶端</span></a></li>
+                                </ul>
+                                <ul class="post-tags">
+                                    <li><i class="fa fa-tags" aria-hidden="true"></i><span>标签:</span></li>
+                                    <li><a href="#"><span>{{ post.tags_name }}</span></a></li>
+                                </ul>
+                                <ul class="post-info">
+                                    <li><i class="fa fa-calendar-o" aria-hidden="true"></i><span><time
+                                            datetime="{{ post.timestamp }}"
+                                            itemprop="datePublished">{{ post.timestamp.strftime('%Y/ %m/ %d') }}</time></span>
+                                    </li>
+                                    <li><i class="fa fa-bars" aria-hidden="true"></i><a
+                                            href="category.html"><span>{{ post.categorys.category_name }}</span></a>
+                                    </li>
+                                    <li><i class="fa fa-comment" aria-hidden="true"></i><span>3 Comments</span></li>
+                                </ul>
+                            </div>
+                        </article>
+                        {#                        <div class="post-author-info">#}
+                        {#                            <div class="row">#}
+                        {#                                <div class="col-md-3">#}
+                        {#                                    <div class="post-author-avatar"#}
+                        {#                                         style="background-image:url('/images/author-avatar.jpg')"></div>#}
+                        {#                                </div>#}
+                        {#                                <div class="col-md-9">#}
+                        {#                                    <h3 itemprop="author">Ahad Ghaderi</h3>#}
+                        {#                                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium#}
+                        {#                                        doloremque laudantium, totam rem aperiam.</p>#}
+                        {#                                    <ul class="post-author-info-social">#}
+                        {#                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>#}
+                        {#                                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>#}
+                        {#                                        <li><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a></li>#}
+                        {#                                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>#}
+                        {#                                        <li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>#}
+                        {#                                    </ul>#}
+                        {#                                </div>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
+                    </div>
+
+
+                    <div class="post-comments">
+                        <div class="content-box">
+                            <div class="content-box-head">
+                                <h3>评论</h3>
+                                <i class="fa fa fa-comments content-box-head-icon green-color"></i>
+                            </div>
+                            <div class="content-box-body">
+                                <ul>
+                                    {% for comment in post.comments %}
+                                        <div class="row">
+                                            <li itemscope itemtype="http://schema.org/UserComments">
+                                                <div class="comment-left">
+                                                    <div class="comment-user-avatar"
+                                                         style="background-image:url('/images/comment-user-avatar1.jpg')"></div>
+                                                </div>
+                                                <div class="comment-right">
+                                                    <div class="comment-right-head"><span class="comment-username"
+                                                                                          itemprop="creator">{{ comment.name }}</span><span
+                                                            class="comment-date"><time datetime="2016-04-21"
+                                                                                       itemprop="commentTime">{{ comment.timestamp.strftime("%Y-%m-%d   %H:%M") }}</time></span><a
+                                                            href="#" class="comment-relpy-btn"
+                                                            itemprop="replyToUrl"><span>Reply</span></a></div>
+                                                    <div class="row">
+                                                        <div class="comment-right-body">
+                                                            <p itemprop="commentText">
+                                                                {{ comment.body if not comment.disabled else '博主盖住了这条评论!!!' }}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </div>
+                                        {% if comment.reply %}
+                                            <ul>
+                                                <li itemscope itemtype="http://schema.org/UserComments">
+                                                    <div class="comment-left">
+                                                        <div class="comment-user-avatar"
+                                                             style="background-image:url('/images/comment-user-avatar3.jpg')"></div>
+                                                    </div>
+                                                    <div class="comment-right">
+                                                        <div class="comment-right-head"><span class="comment-username"
+                                                                                              itemprop="creator">梦魂</span></div>
+                                                        <div class="comment-right-body">
+                                                            <p itemprop="commentText">{{ comment.reply }}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment-form">
+                        <div class="content-box">
+                            <div class="content-box-head">
+                                <h3>发表评论</h3>
+                                <i class="fa fa-comment content-box-head-icon orange-color"></i>
+                            </div>
+                            <div class="popular content-box-body">
+                                <form action="#" method="POST">
+                                    <div class="form-group">
+                                        {{ form.body(class_="form-control", placeholder=" |´・ω・)ノ还不快点说点什么呀poi~") }}
+                                    </div>
+                                    <div class="form-inline row">
+                                        <div class="col-md-6">
+                                            <div class="form-group name-input">
+                                                {{ form.name(class_="form-control",placeholder="昵称") }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group email-input">
+                                                {{ form.email(class_="form-control", placeholder="邮箱") }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{ form.csrf_token }}
+                                    {{ form.submit(class_="btn btn-primary btn-sm") }}
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{ macros.sidebar(posts,g.categories) }}
+        </div>
+    </div>
+{% endblock %}
+
+
